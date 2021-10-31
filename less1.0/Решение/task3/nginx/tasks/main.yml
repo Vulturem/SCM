@@ -1,0 +1,29 @@
+---
+  - name: Include vars
+    include_vars: "host_names.yml"
+  # - name: include vars
+  #   include_vars: "{{ item }}"
+  #   with_items: 
+  #     - web-01.yml
+  #     - web-02.yml
+
+  - name: Install nginx
+    apt:
+      name: "{{ nginx_package_name }}"
+      state: "{{ nginx_version }}"
+      
+  - name: Copy nginx configuration
+    template:
+      src: "nginx.conf.j2"
+      dest: "/etc/nginx/{{ item }}"
+      owner: root
+      group: root
+      mode: 0644
+    with_items: "{{ host_names }}"
+
+
+#  - name: Check service is running and configured.
+#    service:
+#      name: nginx
+#      state: "{{ nginx_service_state }}"
+#      enabled: "{{ nginx_service_enabled }}"

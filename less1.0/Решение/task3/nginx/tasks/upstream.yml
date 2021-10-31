@@ -1,0 +1,7 @@
+  - name: Add Upstreams
+    lineinfile:
+      insertafter: "upstream test {"  
+      path: "/etc/nginx/{{ item }}"
+      line: "{{ outer_item }}"
+    loop: "{{ host_names }}"
+

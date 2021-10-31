@@ -1,0 +1,4 @@
+---
+nginx_server_name: test2.juneway.pro
+nginx_root_path: server2
+
